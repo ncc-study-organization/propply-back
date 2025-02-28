@@ -2,15 +2,15 @@ package com.example;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-/* (exclude = {DataSourceAutoConfiguration.class})
- * 이건 아직 DB 연결이 없을 때 시험삼아 실행시켜보려고 넣은 것이니
- * 나중에 프로젝트 시작하면 지울 것
- */
-@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
-@ComponentScan({"controller.*"})
+// 와일드카드(*)로 인식을 다 했으므로 패키지 형식을 맞추면 된다.
+@SpringBootApplication
+@ComponentScan({"controller.*", "entity.*", "repository.*", "service.*"})
+@EnableJpaRepositories("repository.*")
+@EntityScan("entity.*")
 public class PropplyBackApplication {
 
 	public static void main(String[] args) {
